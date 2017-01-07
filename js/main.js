@@ -19,7 +19,7 @@ function preload(){
 
 //These four things sets the assets for the game. If you want to add music or images, there is where you would preload it.
   game.load.image('background', 'assets/background.png');
-  game.load.image('player', 'assets/player.png');
+  game.load.image('player', 'assets/rocky.jpg');
   game.load.image('ground', 'assets/wallHorizontal.png');
   game.load.image('obstacle', 'assets/wallVertical.png');
 
@@ -41,7 +41,7 @@ function create(){
 	game.physics.arcade.enable(ground);
 	ground.body.immovable = true;
 
-	player = game.add.sprite(game.width/8, game.world.height*(7/8), 'player');
+	player = game.add.sprite(game.width/8, GAME_HEIGHT*(0/4), 'player');
 	game.physics.arcade.enable(player);
 
 	spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -54,12 +54,14 @@ function create(){
 	obstacle.anchor.setTo(0,1);
 	game.physics.arcade.enable(obstacle);
   	obstacle.body.immovable = true;
+  	scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000'});
 
-}
+};
 
 
 
 function update(){
+
 	game.physics.arcade.collide(player, ground);
 	game.physics.arcade.collide(player, obstacle);
 
@@ -71,6 +73,14 @@ function update(){
 	obstacle.x -= 0.5
 	}
 
+	if (obstacle.x < 5 && player.x > 5) {
+
+		score += 10000000000000000;
+
+		scoreText.text = 'score: ' + score;
+
+	}
+
 	if (obstacle.x < 0) { 
 	obstacle.kill();
 	obstacle = game.add.sprite(900, GAME_HEIGHT, 'obstacle');
@@ -78,6 +88,13 @@ function update(){
 	obstacle.anchor.setTo(0,1)
 	game.physics.arcade.enable(obstacle);
 	obstacle.body.immovable = true;
+	}
+
+	
+	if (player.x < 0) {
+		scoreText = game.add.text(350,200, 'YOU LOSE! YOU SUCK!', {fill: '#ff0000'});
+		obstacle.kill();
+		player.kill()
 	}
 };
 
