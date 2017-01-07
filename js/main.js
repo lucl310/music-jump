@@ -66,6 +66,19 @@ function update(){
 	if (spaceKey.isDown && player.body.touching.down) {
 		player.body.velocity.y = -300
 	}
+
+	if (obstacle.x > 600) {
+	obstacle.x -= 0.5
+	}
+
+	if (obstacle.x < 0) { 
+	obstacle.kill();
+	obstacle = game.add.sprite(900, GAME_HEIGHT, 'obstacle');
+	obstacle.scale.setTo(1,0.2);
+	obstacle.anchor.setTo(0,1)
+	game.physics.arcade.enable(obstacle);
+	obstacle.body.immovable = true;
+	}
 };
 
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'gameDiv', { preload: preload, update: update, create: create });
