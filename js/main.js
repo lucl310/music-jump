@@ -17,7 +17,7 @@ var GAME_CONTAINER_ID = 'gameDiv';
 //This is the object which runs the game.
 function preload(){
 
-},
+};
 
 function create(){
 
