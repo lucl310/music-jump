@@ -1,7 +1,7 @@
 console.log(Phaser);
 //This sets the variable for the spacebar.
 var spaceKey;
-
+var platforms;
 var ground;
 var player;
 var obstacle;
@@ -28,7 +28,15 @@ function preload(){
 
 function create() {
 
+
 	game.stage.backgroundColor = '#3498db';
+
+	platforms = game.add.group();
+	platforms.enableBody = true;
+
+	ground = platforms.create(0, GAME_HEIGHT, 'ground')
+	ground.anchor.setTo(0,1);
+	ground.scale.setTo(4, 1)
   //This creates the player character at the bottom left side of the screen.
   player = game.add.sprite(game.width/8, game.world.height*(7/8), 'player');
 
@@ -36,6 +44,8 @@ function create() {
   obstacle = game.add.sprite(700,game.world.height, 'obstacle');
   obstacle.scale.setTo(1,0.2);
   obstacle.anchor.setTo(0,1);
+
+
 }
 
 
