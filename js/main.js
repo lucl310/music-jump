@@ -17,16 +17,34 @@ var GAME_CONTAINER_ID = 'gameDiv';
 //This is the object which runs the game.
 function preload(){
 
-};
+//These four things sets the assets for the game. If you want to add music or images, there is where you would preload it.
+  game.load.image('background', 'assets/background.png');
+  game.load.image('player', 'assets/player.png');
+  game.load.image('ground', 'assets/wallHorizontal.png');
+  game.load.image('obstacle', 'assets/wallVertical.png');
 
-function create(){
+  //If you'd like to load music files, the format would look like  game.load.audio('[name of music]', ['[location for music file]']);
+}
 
-};
+function create() {
+
+	game.stage.backgroundColor = '#3498db';
+  //This creates the player character at the bottom left side of the screen.
+  player = game.add.sprite(game.width/8, game.world.height*(7/8), 'player');
+
+  //This creates the first obstacle on the right side of the screen.
+  obstacle = game.add.sprite(700,game.world.height, 'obstacle');
+  obstacle.scale.setTo(1,0.2);
+  obstacle.anchor.setTo(0,1);
+}
+
 
 function update(){
 
 };
 
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'gameDiv', { preload: preload, update: update, create: create });
+
+
 
 game.state.start();
